@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FARMAцевт - Профиль</title>
+  <style>
+    @import url(https://fonts.googleapis.com/css2?family=Lato&display=swap);
+    @import url(https://fonts.googleapis.com/css2?family=Open+Sans&display=swap);
+    @import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: #f8f9fa;
+      color: #5a5a5a;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    .header {
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 20px 0;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-text {
+      font-family: 'Lato', sans-serif;
+      font-size: 28px;
+      font-weight: bold;
+      color: #282828;
+    }
+
+    .logo-text span {
+      color: #611bf8;
+    }
+
+    .logo-icon {
+      font-size: 36px;
+      color: #611bf8;
+    }
+
+    .auth-btn {
+      background-color: #611bf8;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .auth-btn:hover {
+      background-color: #4607d0;
+      transform: translateY(-2px);
+    }
+
+    /* Profile Section */
+    .profile-section {
+      background: linear-gradient(135deg, #f3f1ff 0%, #e9e5ff 100%);
+      padding: 60px 0;
+      border-radius: 24px;
+      margin: 60px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: 'Lato', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: #282828;
+      margin-bottom: 50px;
+    }
+
+    .profile-container {
+      background-color: white;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .profile-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .avatar-container {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #611bf8;
+    }
+
+    .avatar-options {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .avatar-option {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.3s;
+    }
+    
+    .avatar-option:hover {
+      transform: scale(1.1);
+    }
+    
+    .avatar-option.selected {
+      border-color: #611bf8;
+      box-shadow: 0 0 0 3px rgba(97, 27, 248, 0.3);
+    }
+    
+    /* Скрываем оригинальную кнопку загрузки */
+    .avatar-upload {
+      display: none;
+    }
+
+    .profile-name {
+      font-family: 'Lato', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #282828;
+      margin-bottom: 5px;
+    }
+
+    .profile-email {
+      color: #7f7f7f;
+      font-size: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 600;
+      color: #282828;
+      font-family: 'Lato', sans-serif;
+    }
+
+    .form-group input, 
+    .form-group select {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      font-size: 16px;
+      background-color: #f8f9fa;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #611bf8;
+      outline: none;
+      background-color: #fff;
+      box-shadow: 0 0 0 3px rgba(97, 27, 248, 0.1);
+    }
+
+    .btn {
+      background-color: #611bf8;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: all 0.3s;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background-color: #4607d0;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(97, 27, 248, 0.2);
+    }
+
+    .logout-btn {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+      color: #611bf8;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .logout-btn:hover {
+      color: #4607d0;
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #282828;
+      color: white;
+      padding: 50px 0 20px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Lato', sans-serif;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo span {
+      color: #611bf8;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .footer-link {
+      color: #b1b1b1;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-link:hover {
+      color: white;
+    }
+
+    .footer-copy {
+      color: #7f7f7f;
+      font-size: 14px;
+    }
+
+    /* Модальные окна */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 8px;
+      width: 80%;
+      max-width: 700px;
+      position: relative;
+    }
+
+    .close-btn {
+      position: absolute;
+      right: 20px;
+      top: 10px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      color: #333;
+    }
+
+    .modal-title {
+      font-family: 'Lato', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #282828;
+      margin-bottom: 20px;
+    }
+
+    .modal-text {
+      color: #545454;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .modal-list {
+      margin-bottom: 20px;
+      padding-left: 20px;
+    }
+
+    .modal-list li {
+      margin-bottom: 10px;
+    }
+
+    /* Сообщение об успешном сохранении */
+    .success-message {
+      display: none;
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      animation: fadeIn 0.5s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-container">
+        <div class="logo-container">
+          <span class="material-symbols-outlined logo-icon">local_pharmacy</span>
+          <div class="logo-text">FARMA<span>цевт</span></div>
+        </div>
+        <nav>
+          <a href="page3.html" style="margin-right: 15px; color: #282828; text-decoration: none;">Анкета</a>
+          <a href="#" id="logoutBtn" class="auth-btn">Выйти</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Profile Section -->
+  <section class="profile-section">
+    
+    <div class="container">
+      <h2 class="section-title">Ваш профиль</h2>
+      <div class="profile-container">
+        <div id="successMessage" class="success-message">Данные успешно сохранены!</div>
+        
+        <div class="profile-header">
+          
+          
+          <!-- Добавляем блок с вариантами аватарок -->
+          <div class="avatar-options">
+            <img src="av1.jpg" alt="Аватар 1" class="avatar-option" data-avatar="av1">
+            <img src="av2.jpg" alt="Аватар 2" class="avatar-option" data-avatar="av2">
+            <img src="av3.jpg" alt="Аватар 3" class="avatar-option" data-avatar="av3">
+            <img src="av4.jpg" alt="Аватар 4" class="avatar-option" data-avatar="av4">
+            <img src="av5.jpg" alt="Аватар 5" class="avatar-option" data-avatar="av5">
+          </div>
+          
+          <h3 id="profileName" class="profile-name">Имя Фамилия</h3>
+          <p id="profileEmail" class="profile-email">email@example.com</p>
+        </div>
+        <form id="profileForm">
+          <div class="form-group">
+            <label for="firstName">Имя</label>
+            <input type="text" id="firstName" name="firstName" required placeholder="Введите ваше имя">
+          </div>
+          
+          <div class="form-group">
+            <label for="lastName">Фамилия</label>
+            <input type="text" id="lastName" name="lastName" required placeholder="Введите вашу фамилию">
+          </div>
+          
+          <div class="form-group">
+            <label for="age">Возраст</label>
+            <input type="number" id="age" name="age" min="18" max="100" required placeholder="Укажите ваш возраст">
+          </div>
+          
+          <div class="form-group">
+            <label for="weight">Вес (кг)</label>
+            <input type="number" id="weight" name="weight" min="40" max="200" required placeholder="Укажите ваш вес">
+          </div>
+          
+          <button type="submit" class="btn">Сохранить изменения</button>
+        </form>
+        
+        <a href="#" id="logoutLink" class="logout-btn">Выйти из аккаунта</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">FARMA<span>цевт</span></div>
+      <div class="footer-links">
+        <a href="#" id="aboutLink" class="footer-link">О сервисе</a>
+        <a href="#" id="contactsLink" class="footer-link">Контакты</a>
+        <a href="#" id="privacyLink" class="footer-link">Политика конфиденциальности</a>
+      </div>
+      <p class="footer-copy">© 2025 FARMAцевт. Все права защищены.</p>
+    </div>
+  </footer>
+
+  <!-- Модальные окна (такие же как на других страницах) -->
+  <div id="aboutModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <div class="modal-scrollable-content">
+        <h2 class="modal-title">О сервисе FARMAцевт</h2>
+        <p class="modal-text">FARMAцевт - это инновационный сервис для спортсменов и любителей фитнеса, который предоставляет персонализированные рекомендации по спортивной фармакологии и тренировкам.</p>
+        <p class="modal-text">Наша миссия - сделать спортивную фармакологию безопасной и эффективной за счет точных расчетов и индивидуального подхода.</p>
+        <h3 class="modal-title" style="font-size: 22px; margin-top: 30px;">Наши преимущества:</h3>
+        <ul class="modal-list">
+          <li>Научно обоснованные методики расчета</li>
+          <li>Индивидуальный подход к каждому пользователю</li>
+          <li>Контроль безопасности и минимизация побочных эффектов</li>
+          <li>Комплексные программы (фармакология + тренировки + питание)</li>
+          <li>Конфиденциальность и защита данных</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="contactsModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <div class="modal-scrollable-content">
+        <h2 class="modal-title">Контакты</h2>
+        <p class="modal-text">Мы всегда рады ответить на ваши вопросы и помочь с использованием нашего сервиса.</p>
+        
+        <h3 class="modal-title" style="font-size: 22px; margin-top: 30px;">Способы связи:</h3>
+        <ul class="modal-list">
+          <li><strong>Электронная почта:</strong> vladnistor2007@gmail.com</li>
+          <li><strong>Телефон:</strong> +375 (29) 397-89-99</li>
+          <li><strong>Telegram:</strong> @farmacevt_support</li>
+          <li><strong>Часы работы:</strong> Пн-Пт с 9:00 до 18:00</li>
+        </ul>
+        
+        <h3 class="modal-title" style="font-size: 22px; margin-top: 30px;">Офис компании:</h3>
+        <p class="modal-text">г. Минск, ул. Петруся Бровки, д. 12, корпус 2</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="privacyModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <div class="modal-scrollable-content">
+        <h2 class="modal-title">Политика конфиденциальности</h2>
+        <p class="modal-text">Последнее обновление: 6 мая 2025 года</p>
+        
+        <h3 class="modal-title" style="font-size: 22px; margin-top: 30px;">1. Общие положения</h3>
+        <p class="modal-text">Настоящая Политика конфиденциальности регулирует порядок обработки и использования персональных данных пользователей сервиса FARMAцевт.</p>
+        
+        <h3 class="modal-title" style="font-size: 22px; margin-top: 20px;">2. Какие данные мы собираем</h3>
+        <ul class="modal-list">
+          <li>Персональные данные (имя, возраст, пол)</li>
+          <li>Антропометрические данные (вес, рост)</li>
+          <li>Данные о спортивной активности и целях</li>
+          <li>Технические данные (IP-адрес, тип устройства)</li>
+        </ul>
+        
+        <h3 class="modal-title" style="font-size: 22px; margin-top: 30px;">3. Как мы используем данные</h3>
+        <p class="modal-text">Мы используем ваши данные исключительно для:</p>
+        <ul class="modal-list">
+          <li>Формирования персонализированных рекомендаций</li>
+          <li>Улучшения качества сервиса</li>
+          <li>Обеспечения безопасности</li>
+          <li>Технической поддержки</li>
+        </ul>
+        
+        <h3 class="modal-title" style="font-size: 22px; margin-top: 20px;">4. Защита данных</h3>
+        <p class="modal-text">Мы применяем современные методы шифрования и защиты данных, соответствующие стандартам GDPR.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+ <!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+<script>
+  // Конфигурация Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyBAUD4uAKQkAjbYvOp3fxZHbrfz546L4ak",
+    authDomain: "farma-4c55a.firebaseapp.com",
+    projectId: "farma-4c55a",
+    storageBucket: "farma-4c55a.appspot.com",
+    messagingSenderId: "495155999987",
+    appId: "1:495155999987:web:710ff23e53fd39f963b386",
+    measurementId: "G-7BQRC4B0N3"
+  };
+  
+  // Инициализация Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  const storage = firebase.storage();
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Проверка аутентификации
+    auth.onAuthStateChanged((user) => {
+      if (!user) {
+        window.location.href = 'index2.html'; // Если не авторизован
+      } else {
+        // Загружаем данные пользователя
+        loadUserData(user.uid);
+      }
+    });
+
+    // Загрузка данных пользователя
+    function loadUserData(userId) {
+      db.collection('users').doc(userId).get()
+        .then(doc => {
+          if (doc.exists) {
+            const userData = doc.data();
+            
+            // Заполняем форму данными пользователя
+            document.getElementById('firstName').value = userData.firstName || '';
+            document.getElementById('lastName').value = userData.lastName || '';
+            document.getElementById('age').value = userData.age || '';
+            document.getElementById('weight').value = userData.weight || '';
+            document.getElementById('profileName').textContent = 
+              `${userData.firstName || ''} ${userData.lastName || ''}`.trim() || 'Пользователь';
+            document.getElementById('profileEmail').textContent = userData.email || '';
+            
+            // Загружаем аватар, если он есть
+            if (userData.avatarUrl) {
+              document.getElementById('avatarImage').src = userData.avatarUrl;
+              
+              // Выделяем выбранный аватар
+              document.querySelectorAll('.avatar-option').forEach(option => {
+                if (option.getAttribute('data-avatar') === userData.avatarName) {
+                  option.classList.add('selected');
+                }
+              });
+            }
+          }
+        })
+        .catch(error => {
+          console.error('Ошибка загрузки данных:', error);
+        });
+    }
+
+    // Обработчик выбора аватара
+    document.querySelectorAll('.avatar-option').forEach(option => {
+      option.addEventListener('click', function() {
+        const avatarName = this.getAttribute('data-avatar');
+        const avatarUrl = `avatars/${avatarName}.jpg`; // Путь к предустановленным аватаркам
+        
+        // Убираем выделение у всех вариантов
+        document.querySelectorAll('.avatar-option').forEach(opt => {
+          opt.classList.remove('selected');
+        });
+        
+        // Добавляем выделение выбранному варианту
+        this.classList.add('selected');
+        
+        // Обновляем основной аватар
+        document.getElementById('avatarImage').src = avatarUrl;
+        
+        // Сохраняем в Firestore
+        const userId = auth.currentUser.uid;
+        db.collection('users').doc(userId).update({
+          avatarUrl: avatarUrl,
+          avatarName: avatarName, // Сохраняем имя аватара для последующего выделения
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(() => {
+          showSuccessMessage('Аватар успешно изменен!');
+        }).catch(error => {
+          console.error('Ошибка сохранения аватара:', error);
+          alert('Ошибка при сохранении аватара');
+        });
+      });
+    });
+
+    // Обработчик сохранения формы
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const userId = auth.currentUser.uid;
+      const userData = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        age: document.getElementById('age').value,
+        weight: document.getElementById('weight').value,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      };
+      
+      db.collection('users').doc(userId).update(userData)
+        .then(() => {
+          showSuccessMessage('Данные успешно сохранены!');
+          document.getElementById('profileName').textContent = 
+            `${userData.firstName} ${userData.lastName}`;
+        })
+        .catch(error => {
+          console.error('Ошибка сохранения:', error);
+          alert('Ошибка сохранения данных: ' + error.message);
+        });
+    });
+
+    // Функция показа сообщения об успехе
+    function showSuccessMessage(message) {
+      const successMsg = document.getElementById('successMessage');
+      successMsg.textContent = message;
+      successMsg.style.display = 'block';
+      
+      setTimeout(() => {
+        successMsg.style.display = 'none';
+      }, 3000);
+    }
+
+    // Обработчики выхода
+    document.getElementById('logoutBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      auth.signOut()
+        .then(() => window.location.href = 'index2.html');
+    });
+
+    document.getElementById('logoutLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      auth.signOut()
+        .then(() => window.location.href = 'index2.html');
+    });
+
+    // Обработчики модальных окон
+    document.getElementById('aboutLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('aboutModal').style.display = 'block';
+    });
+
+    document.getElementById('contactsLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('contactsModal').style.display = 'block';
+    });
+
+    document.getElementById('privacyLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('privacyModal').style.display = 'block';
+    });
+
+    // Закрытие модальных окон
+    document.querySelectorAll('.close-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.closest('.modal').style.display = 'none';
+      });
+    });
+
+    // Закрытие при клике вне окна
+    window.addEventListener('click', function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+      }
+    });
+  });
+</script>
+</body>
+</html>
